@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitAI - Virtual Fitting</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>👗 FitAI</h1>
+        <p>AI-Powered Virtual Fitting & Outfit Recommendation</p>
+    </header>
+
+    <main>
+
+        <section class="hero">
+
+            <h2>Find Your Perfect Outfit ✨</h2>
+
+            <p>
+                Upload your full-body photo and get
+                personalized outfit recommendations.
+            </p>
+
+        </section>
+
+
+        <!-- PHOTO -->
+
+        <section class="card">
+
+            <h2>📸 Upload Your Photo</h2>
+
+            <input
+                type="file"
+                id="photo"
+                accept="image/*"
+            >
+
+            <img
+                id="preview"
+                alt="Photo Preview"
+            >
+
+            <button onclick="analyzeBody()">
+                🔍 Analyze My Body
+            </button>
+
+            <div id="analysisResult"></div>
+
+        </section>
+
+
+        <!-- PREFERENCES -->
+
+        <section class="card">
+
+            <h2>👗 Choose Your Preferences</h2>
+
+            <label>Occasion</label>
+
+            <select id="occasion">
+
+                <option value="casual">Casual</option>
+                <option value="party">Party</option>
+                <option value="office">Office</option>
+                <option value="college">College</option>
+                <option value="traditional">Traditional</option>
+
+            </select>
+
+
+            <label>Outfit Type</label>
+
+            <select id="outfit">
+
+                <option value="dress">Dress</option>
+                <option value="top">Top</option>
+                <option value="shirt">Shirt</option>
+                <option value="kurti">Kurti</option>
+                <option value="jeans">Jeans</option>
+
+            </select>
+
+
+            <label>Preferred Color</label>
+
+            <select id="color">
+
+                <option value="Black">Black</option>
+                <option value="Blue">Blue</option>
+                <option value="White">White</option>
+                <option value="Red">Red</option>
+                <option value="Pink">Pink</option>
+                <option value="Green">Green</option>
+
+            </select>
+
+
+            <label>Budget</label>
+
+            <select id="budget">
+
+                <option value="500-1000">₹500 - ₹1000</option>
+                <option value="1000-2500">₹1000 - ₹2500</option>
+                <option value="2500-5000">₹2500 - ₹5000</option>
+                <option value="5000+">₹5000+</option>
+
+            </select>
+
+
+            <button onclick="recommendOutfit()">
+                👗 Recommend My Outfit
+            </button>
+
+        </section>
+
+
+        <!-- RESULT -->
+
+        <section
+            class="card result"
+            id="recommendation"
+        >
+
+            <h2>✨ Your FitAI Recommendation</h2>
+
+            <p>
+                <strong>Occasion:</strong>
+                <span id="resultOccasion"></span>
+            </p>
+
+            <p>
+                <strong>Outfit:</strong>
+                <span id="resultOutfit"></span>
+            </p>
+
+            <p>
+                <strong>Color:</strong>
+                <span id="resultColor"></span>
+            </p>
+
+            <p>
+                <strong>Budget:</strong>
+                <span id="resultBudget"></span>
+            </p>
+
+            <p>
+                <strong>Recommended Size:</strong>
+                <span id="resultSize"></span>
+            </p>
+
+            <h3 id="resultMessage"></h3>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>© 2026 FitAI</p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
