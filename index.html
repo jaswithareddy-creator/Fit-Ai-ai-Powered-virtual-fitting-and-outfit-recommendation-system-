@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitAI - Virtual Fitting</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #1f2937;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 42px;
+        }
+
+        header p {
+            font-size: 17px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 750px;
+            margin: 35px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .upload-box {
+            border: 2px dashed #9ca3af;
+            padding: 30px;
+            margin-top: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        input[type="file"] {
+            margin: 20px;
+        }
+
+        #preview {
+            display: none;
+            width: 280px;
+            max-height: 400px;
+            object-fit: contain;
+            margin: 20px auto;
+            border-radius: 12px;
+        }
+
+        button {
+            background: #111827;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #374151;
+        }
+
+        .preferences {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f9fafb;
+            border-radius: 15px;
+        }
+
+        .field {
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        #analysisResult,
+        #recommendation {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 12px;
+            background: #f3f4f6;
+        }
+
+        .result-title {
+            text-align: center;
+        }
+
+        .recommendation-card {
+            background: white;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+        <h1>👗 FitAI</h1>
+
+        <p>
+            AI-Powered Virtual Fitting & Outfit Recommendation
+        </p>
+    </header>
+
+
+    <!-- MAIN CONTAINER -->
+
+    <div class="container">
+
+        <h2>Find Your Perfect Outfit ✨</h2>
+
+        <p style="text-align:center;">
+            Upload your full-body photo and FitAI will analyze your
+            profile and suggest suitable outfits.
+        </p>
+
+
+        <!-- PHOTO UPLOAD -->
+
+        <div class="upload-box">
+
+            <h3>📸 Upload Your Photo</h3>
+
+            <input
+                type="file"
+                id="photo"
+                accept="image/*"
+            >
+
+            <img
+                id="preview"
+                alt="Uploaded Photo"
+            >
+
+            <br>
+
+            <button onclick="analyzeBody()">
+                🔍 Analyze My Body
+            </button>
+
+        </div>
+
+
+        <!-- ANALYSIS RESULT -->
+
+        <div id="analysisResult">
+
+            <h3 class="result-title">
+                🤖 FitAI Analysis
+            </h3>
+
+            <p id="analysisMessage"></p>
+
+            <p>
+                Body profile:
+                <strong>Detected</strong>
+            </p>
+
+            <p>
+                Estimated Size:
+                <strong id="estimatedSize">M</strong>
+            </p>
+
+        </div>
+
+
+        <!-- USER
