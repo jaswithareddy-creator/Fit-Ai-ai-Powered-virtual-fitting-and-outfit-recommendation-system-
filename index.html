@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,166 +15,202 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f5f7fb;
+            background: #f4f6f8;
+            color: #1f2937;
         }
 
         header {
             background: #111827;
             color: white;
-            padding: 20px;
             text-align: center;
+            padding: 30px 20px;
         }
 
         header h1 {
             margin: 0;
+            font-size: 42px;
+        }
+
+        header p {
+            font-size: 17px;
         }
 
         .container {
-            max-width: 700px;
-            margin: 40px auto;
+            width: 90%;
+            max-width: 750px;
+            margin: 35px auto;
             background: white;
             padding: 30px;
-            border-radius: 15px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
             text-align: center;
         }
 
         .upload-box {
-            border: 2px dashed #999;
+            border: 2px dashed #9ca3af;
             padding: 30px;
-            border-radius: 12px;
-            margin-top: 20px;
+            margin-top: 25px;
+            border-radius: 15px;
+            text-align: center;
         }
 
-        input {
+        input[type="file"] {
             margin: 20px;
         }
 
         #preview {
-            max-width: 300px;
-            max-height: 400px;
             display: none;
+            width: 280px;
+            max-height: 400px;
+            object-fit: contain;
             margin: 20px auto;
-            border-radius: 10px;
+            border-radius: 12px;
         }
 
         button {
             background: #111827;
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 13px 25px;
             border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
+            margin-top: 10px;
         }
 
         button:hover {
             background: #374151;
         }
 
-        #result {
+        .preferences {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f9fafb;
+            border-radius: 15px;
+        }
+
+        .field {
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        #analysisResult,
+        #recommendation {
+            display: none;
             margin-top: 25px;
             padding: 20px;
+            border-radius: 12px;
             background: #f3f4f6;
+        }
+
+        .result-title {
+            text-align: center;
+        }
+
+        .recommendation-card {
+            background: white;
+            padding: 15px;
+            margin-top: 15px;
             border-radius: 10px;
-            display: none;
+            border: 1px solid #ddd;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #6b7280;
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>👗 FitAI</h1>
-    <p>AI-Powered Virtual Fitting & Outfit Recommendation</p>
-</header>
+    <!-- HEADER -->
 
-<div class="container">
-
-    <h2>Find Your Perfect Outfit</h2>
-
-    <p>
-        Upload your full-body photo and FitAI will analyze your body
-        and recommend suitable outfits.
-    </p>
-
-    <div class="upload-box">
-
-        <input
-            type="file"
-            id="photo"
-            accept="image/*"
-        >
-
-        <img id="preview" alt="Your photo">
-
-        <br>
-
-        <button onclick="analyzeBody()">
-            Analyze My Body
-        </button>
-
-    </div>
-
-    <div id="result">
-        <h3>✨ FitAI Recommendation</h3>
-
-        <p id="message"></p>
+    <header>
+        <h1>👗 FitAI</h1>
 
         <p>
-            Recommended Size:
-            <strong id="size">M</strong>
+            AI-Powered Virtual Fitting & Outfit Recommendation
+        </p>
+    </header>
+
+
+    <!-- MAIN CONTAINER -->
+
+    <div class="container">
+
+        <h2>Find Your Perfect Outfit ✨</h2>
+
+        <p style="text-align:center;">
+            Upload your full-body photo and FitAI will analyze your
+            profile and suggest suitable outfits.
         </p>
 
-        <p>
-            Recommended Outfit:
-            <strong id="outfit">Casual Dress</strong>
-        </p>
-    </div>
 
-</div>
+        <!-- PHOTO UPLOAD -->
 
-<script>
+        <div class="upload-box">
 
-const photoInput = document.getElementById("photo");
-const preview = document.getElementById("preview");
+            <h3>📸 Upload Your Photo</h3>
 
-photoInput.addEventListener("change", function () {
+            <input
+                type="file"
+                id="photo"
+                accept="image/*"
+            >
 
-    const file = this.files[0];
+            <img
+                id="preview"
+                alt="Uploaded Photo"
+            >
 
-    if (file) {
+            <br>
 
-        preview.src = URL.createObjectURL(file);
+            <button onclick="analyzeBody()">
+                🔍 Analyze My Body
+            </button>
 
-        preview.style.display = "block";
-    }
+        </div>
 
-});
 
-function analyzeBody() {
+        <!-- ANALYSIS RESULT -->
 
-    const file = photoInput.files[0];
+        <div id="analysisResult">
 
-    if (!file) {
+            <h3 class="result-title">
+                🤖 FitAI Analysis
+            </h3>
 
-        alert("Please upload your full-body photo.");
+            <p id="analysisMessage"></p>
 
-        return;
-    }
+            <p>
+                Body profile:
+                <strong>Detected</strong>
+            </p>
 
-    document.getElementById("result").style.display = "block";
+            <p>
+                Estimated Size:
+                <strong id="estimatedSize">M</strong>
+            </p>
 
-    document.getElementById("message").innerText =
-        "Your body profile has been analyzed successfully!";
+        </div>
 
-    document.getElementById("size").innerText = "M";
 
-    document.getElementById("outfit").innerText =
-        "Casual Dress";
-
-}
-
-</script>
-
-</body>
-</html>
+        <!-- USER
