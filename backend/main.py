@@ -118,3 +118,5 @@ async def analyze_body(file: UploadFile = File(...)):
 
         "message": "Body landmarks detected successfully."
     }
+
+
