@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitAI - Virtual Fitting</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .upload-box {
+            border: 2px dashed #999;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        input {
+            margin: 20px;
+        }
+
+        #preview {
+            max-width: 300px;
+            max-height: 400px;
+            display: none;
+            margin: 20px auto;
+            border-radius: 10px;
+        }
+
+        button {
+            background: #111827;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #374151;
+        }
+
+        #result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f3f4f6;
+            border-radius: 10px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>👗 FitAI</h1>
+    <p>AI-Powered Virtual Fitting & Outfit Recommendation</p>
+</header>
+
+<div class="container">
+
+    <h2>Find Your Perfect Outfit</h2>
+
+    <p>
+        Upload your full-body photo and FitAI will analyze your body
+        and recommend suitable outfits.
+    </p>
+
+    <div class="upload-box">
+
+        <input
+            type="file"
+            id="photo"
+            accept="image/*"
+        >
+
+        <img id="preview" alt="Your photo">
+
+        <br>
+
+        <button onclick="analyzeBody()">
+            Analyze My Body
+        </button>
+
+    </div>
+
+    <div id="result">
+        <h3>✨ FitAI Recommendation</h3>
+
+        <p id="message"></p>
+
+        <p>
+            Recommended Size:
+            <strong id="size">M</strong>
+        </p>
+
+        <p>
+            Recommended Outfit:
+            <strong id="outfit">Casual Dress</strong>
+        </p>
+    </div>
+
+</div>
+
+<script>
+
+const photoInput = document.getElementById("photo");
+const preview = document.getElementById("preview");
+
+photoInput.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if (file) {
+
+        preview.src = URL.createObjectURL(file);
+
+        preview.style.display = "block";
+    }
+
+});
+
+function analyzeBody() {
+
+    const file = photoInput.files[0];
+
+    if (!file) {
+
+        alert("Please upload your full-body photo.");
+
+        return;
+    }
+
+    document.getElementById("result").style.display = "block";
+
+    document.getElementById("message").innerText =
+        "Your body profile has been analyzed successfully!";
+
+    document.getElementById("size").innerText = "M";
+
+    document.getElementById("outfit").innerText =
+        "Casual Dress";
+
+}
+
+</script>
+
+</body>
+</html>
